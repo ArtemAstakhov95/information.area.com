@@ -50,7 +50,7 @@
                     <h2>Особистості цього періоду</h2>
                     <?foreach($this->personConcepts as $p){?>
                         <div class="concept">
-                            <a href="/concept/<?=$p['id']?>"><?=$p['concept']?></a> <sub>(<?=$p['year_start']?><?if($p['year_end'] != null || $p['year_end']!=0){?> - <?=$p['year_end']?><?}?>)</sub>
+                            <a href="/concept/<?=$p->getId()?>"><?=$p->getConcept()?></a> <sub>(<?=$p->getYearStart()?><?if($p->getYearEnd() != null || $p->getYearEnd()!=0){?> - <?=$p->getYearEnd()?><?}?>)</sub>
                         </div>
                     <?}?>
                 </div>
@@ -58,7 +58,7 @@
                     <h2>Події цього періоду</h2>
                     <?foreach($this->actionConcepts as $p){?>
                         <div class="concept">
-                            <a href="/concept/<?=$p['id']?>"><?=$p['concept']?></a> <sub>(<?=$p['year_start']?><?if($p['year_end'] != null || $p['year_end']!=0){?> - <?=$p['year_end']?><?}?>)</sub>
+                            <a href="/concept/<?=$p->getId()?>"><?=$p->getConcept()?></a> <sub>(<?=$p->getYearStart()?><?if($p->getYearEnd() != null || $p->getYearEnd()!=0){?> - <?=$p->getYearEnd()?><?}?>)</sub>
                         </div>
                     <?}?>
                 </div>
@@ -66,7 +66,7 @@
                     <h2>Інституції цього періоду</h2>
                     <?foreach($this->institutionsConcepts as $p){?>
                         <div class="concept">
-                            <a href="/concept/<?=$p['id']?>"><?=$p['concept']?></a> <sub>(<?=$p['year_start']?><?if($p['year_end'] != null || $p['year_end']!=0){?> - <?=$p['year_end']?><?}?>)</sub>
+                            <a href="/concept/<?=$p->getId()?>"><?=$p->getConcept()?></a> <sub>(<?=$p->getYearStart()?><?if($p->getYearEnd() != null || $p->getYearEnd()!=0){?> - <?=$p->getYearEnd()?><?}?>)</sub>
                         </div>
                     <?}?>
                 </div>
@@ -74,7 +74,7 @@
                     <h2>Документи цього періоду</h2>
                     <?foreach($this->documentConcepts as $p){?>
                         <div class="concept">
-                            <a href="/concept/<?=$p['id']?>"><?=$p['concept']?></a> <sub>(<?=$p['year_start']?><?if($p['year_end'] != null || $p['year_end']!=0){?> - <?=$p['year_end']?><?}?>)</sub>
+                            <a href="/concept/<?=$p->getId()?>"><?=$p->getConcept()?></a> <sub>(<?=$p->getYearStart()?><?if($p->getYearEnd() != null || $p->getYearEnd()!=0){?> - <?=$p->getYearEnd()?><?}?>)</sub>
                         </div>
                     <?}?>
                 </div>

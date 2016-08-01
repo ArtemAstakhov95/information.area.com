@@ -6,7 +6,9 @@
  * Time: 11:11
  */
 include_once 'Recordset.php';
-include_once 'ParseContent.php';
+include_once 'Repo/ParseContent.php';
+include_once 'Repo/Concept.php';
+include_once 'Repo/These.php';
 
 class Page
 {
@@ -19,9 +21,10 @@ class Page
     private $id,$page_code,$caption,$intro,$content,$date, $image,$main,$parentCode,$isContainer, $view, $year_start, $year_end;
     private $filename, $admin='',$title='Історі України', $pages=array();
     private $pageConcepts=array();
-    public $personConcepts=array(), $institutionsConcepts=array(), $actionConcepts=array(),$documentConcepts=array(),$conceptDefinition=array();
+    public  $personConcepts=array(), $institutionsConcepts=array(), $actionConcepts=array(),$documentConcepts=array(),$conceptDefinition=array();
     private $minYear,$maxYear;
     public $article, $dat=array(), $concept_id_in_these=array(), $concept_id=array(), $conceptPages=array(), $relatedConcepts=array();
+    public $currentConcept, $currentConceptData=array();
 
     public function __construct($code, $view_type, $article, $init, $data)
     {
@@ -61,28 +64,15 @@ class Page
                 $this->maxYear = $m[1];
                 self::$db->SQL("SELECT c.*,cc.class as class_caption FROM Concepts c, Concept_class cc WHERE c.class=cc.code ORDER By c.year_start");
                 while ($row = self::$db->nextRow()) {
-                    switch ($row['class']) {
-                        case 'person':
-                            array_push($this->personConcepts, $row);
-                            break;
-                        case 'action':
-                            array_push($this->actionConcepts, $row);
-                            break;
-                        case 'institution':
-                            array_push($this->institutionsConcepts, $row);
-                            break;
-                        case 'document':
-                            array_push($this->documentConcepts, $row);
-                            break;
-                    }
+                    $concept = new Concept($row);
+                    $concept->separateConceptsOnClass($this);
                 }
                 $sql = "SELECT * FROM pages WHERE isContainer=0 AND parentCode<>'main'";
             } else {
 
             }
             self::$db->SQL("SELECT * FROM pages WHERE content<>'null' ORDER BY year_start");
-        }
-        else{
+        } else {
             if ($this->page_code == 'login') {
                 $this->view = 'login';
             } elseif ($this->page_code == 'concept') {
